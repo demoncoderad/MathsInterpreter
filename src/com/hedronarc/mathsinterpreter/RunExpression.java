@@ -15,7 +15,16 @@ public class RunExpression {
 
         if (ErrorHandler.ErrorStatus) return;
 
-        String result = Double.toString((Double) new Interpreter().Evaluate(expr));
+        Object res = new Interpreter().Evaluate(expr);
+        String result;
+        if (res instanceof Boolean) {
+            if ((Boolean) res == false)
+                result = "false";
+            else
+                result = "true";
+        } else {
+            result = Double.toString((Double) res);
+        }
         if (result.charAt(result.length()-2) == '.' && result.charAt(result.length()-1) == '0')
             result = result.substring(0, result.length() - 2);
 
